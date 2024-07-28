@@ -1,0 +1,36 @@
+﻿<Window x:Class="FileManagementApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:FileManagementApp.ViewModels"
+        Title="File Management App" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
+
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <Image Source="/Resources/free-icon-cat-1998592.png" HorizontalAlignment="Left"
+                   Width="64" Height="64" Margin="0,0,10,4"/>
+
+            <TextBox Width="200" Height="34" Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Search" Command="{Binding SearchCommand}" Width="75" Margin="5"/>
+                <Button Content="Close Selected File" Command="{Binding CloseFileCommand}" 
+         CommandParameter="{Binding SelectedFile}"
+        Width="150" Margin="5"/>
+            </StackPanel>
+            <DataGrid ItemsSource="{Binding Files}" 
+                      SelectedItem="{Binding SelectedFile, Mode=TwoWay}"
+                      AutoGenerateColumns="False" Height="300">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*"/>
+                    <DataGridTextColumn Header="Path Name" Binding="{Binding PathName}" Width="*"/>
+                    <DataGridTextColumn Header="User Name" Binding="{Binding UserName}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </StackPanel>
+    </Grid>
+    
+</Window>
